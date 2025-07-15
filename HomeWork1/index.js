@@ -22,15 +22,15 @@ if (typeof a == 'number' && typeof b == 'number') {
   //Создаю события. addListener и on одно и тоже
   emiter.addListener('+', (a, b) => (result = add(a, b)))
   emiter.addListener('-', (a, b) => (result = substract(a, b)))
-  if (b != 0) {
-    emiter.on('/', (a, b) => (result = divide(a, b)))
+
+  emiter.on('/', (a, b) => (result = divide(a, b)))
+  emiter.on('*', (a, b) => (result = multiply(a, b)))
+
+  if (b != 0 && operation === '/') {
+    emiter.emit(operation, a, b)
   } else {
     console.log('Деленеие на 0 запрещено')
   }
-
-  emiter.on('*', (a, b) => (result = multiply(a, b)))
-
-  emiter.emit(operation, a, b)
   console.log(result)
 } else {
   console.log('Ввели не верное количество аргуметнов')
