@@ -21,5 +21,5 @@ emiter.addListener('-', (a, b) => (result = substract(a, b)))
 emiter.on('/', (a, b) => (result = divide(a, b)))
 emiter.on('*', (a, b) => (result = multiply(a, b)))
 
-emiter.emit(operation)
+emiter.emit(operation, a, b)
 console.log(result)
