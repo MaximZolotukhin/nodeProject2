@@ -13,6 +13,7 @@ const a = +args[0]
 const b = +args[1]
 const operation = args[2]
 
+//Создаю события. addListener и on одно и тоже
 emiter.addListener('add', (a, b) => (resultAdd = add(a, b)))
 emiter.addListener('subtract', (a, b) => (resultSubtract = subtract(a, b)))
 emiter.on('divide', (a, b) => (resultDivide = divide(a, b)))
@@ -20,6 +21,7 @@ emiter.on('multiply', (a, b) => (resultMultiply = multiply(a, b)))
 
 switch (operation) {
   case '+':
+    // Запускаяю событие
     emiter.emit('add', a, b)
     console.log(resultAdd)
     break
