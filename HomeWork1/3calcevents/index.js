@@ -16,26 +16,10 @@ const operation = args[2]
 let result = undefined
 
 //Создаю события. addListener и on одно и тоже
-emiter.addListener('+', (a, b) => {
-  console.log(emiter.emit(add(a, b)))
-})
+emiter.addListener('+', (a, b) => (result = add(a, b)))
 emiter.addListener('-', (a, b) => (result = substract(a, b)))
-// Слушатель событий через on
-emiter.on('/', (a, b) => {
-  console.log(emiter.emit(divide(a, b)))
-})
+emiter.on('/', (a, b) => (result = divide(a, b)))
 emiter.on('*', (a, b) => (result = multiply(a, b)))
 
-// Тестирую два подхода
-switch (operation) {
-  case '-':
-    emiter.emit('substract', a, b)
-    console.log(result)
-    break
-  case '*':
-    emiter.emit('multiply', a, b)
-    console.log(result)
-    break
-  default:
-    console.log('Неправильный оператор')
-}
+emiter.emit(operation)
+console.log(result)
