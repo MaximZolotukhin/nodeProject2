@@ -26,18 +26,10 @@ emiter.on('/', (a, b) => {
 })
 emiter.on('*', (a, b) => (result = multiply(a, b)))
 
+// Тестирую два подхода
 switch (operation) {
-  // case '+':
-  //   // Запускаю событие
-  //   emiter.emit('add', a, b)
-  //   console.log(result)
-  //   break
   case '-':
     emiter.emit('substract', a, b)
-    console.log(result)
-    break
-  case '/':
-    emiter.emit('divide', a, b)
     console.log(result)
     break
   case '*':
