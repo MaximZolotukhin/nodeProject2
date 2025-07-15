@@ -1,29 +1,25 @@
+// Подключение библиотек
 const add = require('./add.js')
 const substract = require('./substract.js')
 const divide = require('./divide.js')
-const multiply = require('./multyply.js')
+const multiply = require('./multiply.js')
 
+const EventEmmiter = require('events')
+const emiter = new EventEmmiter()
+
+// Операция умножения вызывается через '*'
 const args = process.argv.slice(2)
-console.log(process)
 const a = +args[0]
 const b = +args[1]
 const operation = args[2]
 
-function calculater(a, b, operation) {
-  switch (operation) {
-    case '+':
-      return add(a, b)
-    case '-':
-      return substract(a, b)
-    case '/':
-      return divide(a, b)
-    case '*':
-      return multiply(a, b)
-    default:
-      console.log('Неправильный оператор')
-  }
-}
+let result = undefined
 
-console.log(process.argv)
+//Создаю события. addListener и on одно и тоже
+emiter.addListener('+', (a, b) => (result = add(a, b)))
+emiter.addListener('-', (a, b) => (result = substract(a, b)))
+emiter.on('/', (a, b) => (result = divide(a, b)))
+emiter.on('*', (a, b) => (result = multiply(a, b)))
 
-console.log(calculater(a, b, operation))
+emiter.emit(operation, a, b)
+console.log(result)
