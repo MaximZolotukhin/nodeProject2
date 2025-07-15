@@ -1,10 +1,9 @@
 const add = require('../add.js')
 const substract = require('../substract.js')
 const divide = require('../divide.js')
-const multiply = require('../multyply.js')
+const multiply = require('../multiply.js')
 
 const args = process.argv.slice(2)
-console.log(process)
 const a = +args[0]
 const b = +args[1]
 const operation = args[2]
@@ -24,6 +23,6 @@ function calculater(a, b, operation) {
   }
 }
 
-console.log(process.argv)
+// console.log(process.argv)
 
 console.log(calculater(a, b, operation))
