@@ -1,3 +1,4 @@
+// Подключение библиотек
 const add = require('../add.js')
 const subtract = require('../subtract.js')
 const divide = require('../divide.js')
