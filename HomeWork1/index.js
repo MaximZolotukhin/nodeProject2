@@ -1,5 +1,5 @@
 const add = require('./add.js')
-const subtract = require('./subtract.js')
+const substract = require('./substract.js')
 const divide = require('./divide.js')
 const multiply = require('./multyply.js')
 
@@ -14,11 +14,13 @@ function calculater(a, b, operation) {
     case '+':
       return add(a, b)
     case '-':
-      return subtract(a, b)
+      return substract(a, b)
     case '/':
       return divide(a, b)
     case '*':
       return multiply(a, b)
+    default:
+      console.log('Неправильный оператор')
   }
 }
 

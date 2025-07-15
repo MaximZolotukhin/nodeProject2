@@ -1,7 +1,6 @@
-
 // Подключение библиотек
 const add = require('../add.js')
-const subtract = require('../subtract.js')
+const substract = require('../substract.js')
 const divide = require('../divide.js')
 const multiply = require('../multyply.js')
 
@@ -14,29 +13,37 @@ const a = +args[0]
 const b = +args[1]
 const operation = args[2]
 
+let result = undefined
 
 //Создаю события. addListener и on одно и тоже
-emiter.addListener('add', (a, b) => (resultAdd = add(a, b)))
-emiter.addListener('subtract', (a, b) => (resultSubtract = subtract(a, b)))
-emiter.on('divide', (a, b) => (resultDivide = divide(a, b)))
-emiter.on('multiply', (a, b) => (resultMultiply = multiply(a, b)))
+emiter.addListener('+', (a, b) => {
+  console.log(emiter.emit(add(a, b)))
+})
+emiter.addListener('-', (a, b) => (result = substract(a, b)))
+// Слушатель событий через on
+emiter.on('/', (a, b) => {
+  console.log(emiter.emit(divide(a, b)))
+})
+emiter.on('*', (a, b) => (result = multiply(a, b)))
 
 switch (operation) {
-  case '+':
-    // Запускаяю событие
-    emiter.emit('add', a, b)
-    console.log(resultAdd)
-    break
+  // case '+':
+  //   // Запускаю событие
+  //   emiter.emit('add', a, b)
+  //   console.log(result)
+  //   break
   case '-':
-    emiter.emit('subtract', a, b)
-    console.log(resultSubtract)
+    emiter.emit('substract', a, b)
+    console.log(result)
     break
   case '/':
     emiter.emit('divide', a, b)
-    console.log(resultDivide)
+    console.log(result)
     break
   case '*':
     emiter.emit('multiply', a, b)
-    console.log(resultMultiply)
+    console.log(result)
     break
+  default:
+    console.log('Неправильный оператор')
 }
