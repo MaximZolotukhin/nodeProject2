@@ -13,10 +13,10 @@ const a = +args[0]
 const b = +args[1]
 const operation = args[2]
 
-if (typeof a == number && typeof b == number) {
+if (typeof a == 'number' && typeof b == 'number') {
   let result = undefined
 
-  if (operation != '+' || operation != '-' || operation != '/' || operation != '*') {
+  if (operation != '+' && operation != '-' && operation != '/' && operation != '*') {
     result = 'Неизвестная операция'
   }
   //Создаю события. addListener и on одно и тоже
