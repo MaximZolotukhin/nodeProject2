@@ -1,3 +1,4 @@
+
 // Подключение библиотек
 const add = require('../add.js')
 const subtract = require('../subtract.js')
@@ -12,6 +13,7 @@ const args = process.argv.slice(2)
 const a = +args[0]
 const b = +args[1]
 const operation = args[2]
+
 
 //Создаю события. addListener и on одно и тоже
 emiter.addListener('add', (a, b) => (resultAdd = add(a, b)))
