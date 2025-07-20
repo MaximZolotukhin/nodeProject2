@@ -13,12 +13,9 @@ const a = +args[0]
 const b = +args[1]
 const operation = args[2]
 
-if (Number.isFinite(a) && Number.isFinite(a)) {
+if (Number.isFinite(a) && Number.isFinite(b)) {
   let result = undefined
 
-  if (operation != '+' && operation != '-' && operation != '/' && operation != '*') {
-    result = 'Неизвестная операция'
-  }
   //Создаю события. addListener и on одно и тоже
   emiter.addListener('+', (a, b) => (result = add(a, b)))
   emiter.addListener('-', (a, b) => (result = substract(a, b)))
@@ -40,8 +37,7 @@ if (Number.isFinite(a) && Number.isFinite(a)) {
       if (b != 0 && operation === '/') {
         emiter.emit(operation, a, b)
       } else {
-        result = 'Деленеие на 0 запрещено'
-        // return result
+        result = 'Деление на 0 запрещено'
       }
       break
     default:
@@ -50,5 +46,5 @@ if (Number.isFinite(a) && Number.isFinite(a)) {
 
   console.log(result)
 } else {
-  console.log('Ввели не верное количество аргуметнов')
+  console.log('Ввели не верное количество аргумeнтов')
 }
