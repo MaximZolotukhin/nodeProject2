@@ -32,6 +32,11 @@ if (typeof a == 'number' && typeof b == 'number') {
     console.log('Деленеие на 0 запрещено')
   }
   console.log(result)
+
+  switch (operation) {
+    case '+':
+      emiter.emit(operation, a, b)
+  }
 } else {
   console.log('Ввели не верное количество аргуметнов')
 }
