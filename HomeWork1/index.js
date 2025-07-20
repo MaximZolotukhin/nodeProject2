@@ -13,7 +13,7 @@ const a = +args[0]
 const b = +args[1]
 const operation = args[2]
 
-if (typeof a == 'number' && typeof b == 'number') {
+if (Number.isFinite(a) && Number.isFinite(a)) {
   let result = undefined
 
   if (operation != '+' && operation != '-' && operation != '/' && operation != '*') {
@@ -26,17 +26,29 @@ if (typeof a == 'number' && typeof b == 'number') {
   emiter.on('/', (a, b) => (result = divide(a, b)))
   emiter.on('*', (a, b) => (result = multiply(a, b)))
 
-  if (b != 0 && operation === '/') {
-    emiter.emit(operation, a, b)
-  } else {
-    console.log('Деленеие на 0 запрещено')
-  }
-  console.log(result)
-
   switch (operation) {
     case '+':
       emiter.emit(operation, a, b)
+      break
+    case '-':
+      emiter.emit(operation, a, b)
+      break
+    case '*':
+      emiter.emit(operation, a, b)
+      break
+    case '/':
+      if (b != 0 && operation === '/') {
+        emiter.emit(operation, a, b)
+      } else {
+        result = 'Деленеие на 0 запрещено'
+        // return result
+      }
+      break
+    default:
+      console.log(`${operation} Не поддерживаемая операция`)
   }
+
+  console.log(result)
 } else {
   console.log('Ввели не верное количество аргуметнов')
 }
