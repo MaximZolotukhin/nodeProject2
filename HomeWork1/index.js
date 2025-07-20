@@ -23,6 +23,7 @@ if (Number.isFinite(a) && Number.isFinite(b)) {
   emiter.on('/', (a, b) => (result = divide(a, b)))
   emiter.on('*', (a, b) => (result = multiply(a, b)))
 
+  // Проверка на введенню операцию
   switch (operation) {
     case '+':
       emiter.emit(operation, a, b)
