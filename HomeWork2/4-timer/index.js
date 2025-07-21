@@ -1,17 +1,16 @@
-function startTimer(timeString) {
-  // Разбиваем строку по пробелам
-  const parts = timeString.split(' ')
+function startTimer(parts) {
+  // parts — это массив, например: ['1h', '30m', '45s']
 
   let totalSeconds = 0
 
   for (const part of parts) {
-    if (!part) continue
+    if (!part || typeof part !== 'string') continue
 
-    const unit = part.slice(-1) // Последний символ: h, m, s
-    const value = parseInt(part, 10) // Число из начала строки
+    const unit = part.slice(-1).toLowerCase()
+    const value = parseInt(part, 10)
 
     if (isNaN(value)) {
-      console.log(`Ошибка: не удалось прочитать число в "${part}"`)
+      console.log(`❌ Ошибка: не удалось прочитать число в "${part}"`)
       return
     }
 
@@ -26,20 +25,31 @@ function startTimer(timeString) {
         totalSeconds += value
         break
       default:
-        console.log(`Неизвестная единица: ${unit}. Используйте h, m, s.`)
+        console.log(`⚠️ Неизвестная единица: ${unit}. Используйте h, m, s.`)
         return
     }
   }
 
   if (totalSeconds <= 0) {
-    console.log('Время должно быть больше нуля.')
+    console.log('⏰ Время должно быть больше нуля.')
     return
   }
 
-  console.log(`Таймер запущен на ${totalSeconds} секунд...`)
+  console.log(`✅ Таймер запущен на ${totalSeconds} секунд...`)
 
   setTimeout(() => {
-    console.log('Работа таймера завершена')
-    process.stdout.write('\x07') // Звуковой сигнал (если поддерживается)
+    console.log('🎉 Работа таймера завершена!')
+    process.stdout.write('\x07')
   }, totalSeconds * 1000)
 }
+
+// Получаем аргументы
+const args = process.argv.slice(2)
+
+if (args.length === 0) {
+  console.log('Использование: node timer.js <время>\nПример: node timer.js 1h 30m 45s')
+  process.exit(1)
+}
+
+// ✅ ПЕРЕДАЁМ МАССИВ НАПРЯМУЮ — БЕЗ join!
+startTimer(args)
