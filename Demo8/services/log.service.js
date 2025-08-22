@@ -9,7 +9,21 @@ const printSuccess = (message) => {
   console.log(`${chalk.bgGreen(' SUCCESS ')} ${message}`)
 }
 
-const printHelp = () => {
+const printWeather = (res, icon) => {
+  console.log(
+    dedent(`
+  ${chalk.bgYellow(' SUCCSESS ')}
+  ${chalk.bgYellow(' WEATHER ')} 
+  Погода в городе ${res.name}
+  ${icon}  ${res.weather[0].description} 
+  Температура: ${res.main.temp} (ощущается как ${res.main.feels_like})
+  Влажность: ${res.main.humidity}
+  Скорость ветра: ${res.wind.speed}
+  `)
+  )
+}
+
+const printHelp = (response, icon) => {
   console.log(
     dedent(`
   ${chalk.bgCyan(' HELP ')}
@@ -21,4 +35,4 @@ const printHelp = () => {
   )
 }
 
-export { printError, printSuccess, printHelp }
+export { printError, printSuccess, printHelp, printWeather }
