@@ -31,11 +31,27 @@ const saveCity = async (city) => {
   }
 }
 
+const saveLanguage = async (language) => {
+  if (!language.length) {
+    printError('Не передан язык')
+    return
+  }
+  try {
+    await saveKeyValue(TOKEN_DICTIONARY.language, language)
+    printSuccess('Язык сохранён')
+  } catch (error) {
+    printError(error.message)
+  }
+}
+
 const getForcast = async () => {
   try {
-    const city = await getKeyValue(TOKEN_DICTIONARY.city)
-    const weather = await getWeather(city)
-    printWeather(weather, getIcon(weather.weather[0].icon))
+    const citys = await getKeyValue(TOKEN_DICTIONARY.city)
+    const language = await getKeyValue(TOKEN_DICTIONARY.language)
+    for (const city of citys) {
+      const weather = await getWeather(city, language)
+      printWeather(weather, getIcon(weather.weather[0].icon), language)
+    }
   } catch (error) {
     if (error?.response?.status === 404) {
       printError('Неверно указан город!')
@@ -56,6 +72,10 @@ const initCLI = () => {
 
   if (args.s) {
     return saveCity(args.s)
+  }
+
+  if (args.l) {
+    return saveLanguage(args.l)
   }
 
   if (args.t) {
