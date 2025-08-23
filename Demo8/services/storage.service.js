@@ -7,6 +7,7 @@ const filePath = join(homedir(), 'Documents/Learn/4.Node.JS/02.NodeProjectPurple
 const TOKEN_DICTIONARY = {
   token: 'token',
   city: 'city',
+  language: 'language',
 }
 
 const saveKeyValue = async (key, value) => {

@@ -9,9 +9,10 @@ const printSuccess = (message) => {
   console.log(`${chalk.bgGreen(' SUCCESS ')} ${message}`)
 }
 
-const printWeather = (res, icon) => {
-  console.log(
-    dedent(`
+const printWeather = (res, icon, language) => {
+  if (language == 'ru') {
+    console.log(
+      dedent(`
   ${chalk.bgYellow(' SUCCSESS ')}
   ${chalk.bgYellow(' WEATHER ')} 
   Погода в городе ${res.name}
@@ -20,7 +21,21 @@ const printWeather = (res, icon) => {
   Влажность: ${res.main.humidity}
   Скорость ветра: ${res.wind.speed}
   `)
-  )
+    )
+  }
+  if (language == 'en') {
+    console.log(
+      dedent(`
+  ${chalk.bgYellow(' SUCCESS ')}
+  ${chalk.bgYellow(' WEATHER ')} 
+  Weather in city ${res.name}
+  ${icon}  ${res.weather[0].description} 
+  Temperature: ${res.main.temp} (feels like ${res.main.feels_like})
+  Humidity: ${res.main.humidity}
+  Wind speed: ${res.wind.speed}
+  `)
+    )
+  }
 }
 
 const printHelp = (response, icon) => {
@@ -31,6 +46,7 @@ const printHelp = (response, icon) => {
   -s [CITY] для установки города
   -h для вывода помощи
   -t [API_KEY] для сохранение токена
+  -l для установки языка
   `)
   )
 }
