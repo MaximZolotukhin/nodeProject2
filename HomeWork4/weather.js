@@ -5,17 +5,21 @@ const app = express()
 const PORT = 8000
 
 app.get('/', async (req, res) => {
-  const city = req.query.city
-  const weather = await getWeather(city, 'ru')
-
-  const weatherResp = `
+  const city = req.query.city ?? 'Курск'
+  try {
+    const weather = await getWeather(city, 'ru')
+    const weatherResp = `
   Погода в городе ${weather.name}
   ${getIcon(weather.weather[0].icon)}  ${weather.weather[0].description}
   Температура: ${weather.main.temp} (ощущается как ${weather.main.feels_like})
   Влажность: ${weather.main.humidity}%
   Скорость ветра: ${weather.wind.speed} м/с
   `
-  res.send(weatherResp)
+    res.send(weatherResp)
+  } catch (error) {
+    console.error(error.message)
+    res.send(error.message)
+  }
 })
 
 app.listen(PORT, () => {
