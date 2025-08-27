@@ -1,0 +1,41 @@
+import { homedir } from 'os'
+import { join } from 'path'
+import { promises } from 'fs'
+
+const filePath = join(homedir(), 'Documents/Learn/4.Node.JS/02.NodeProjectPurpleStudio/Demo8/', 'weather-data.json')
+
+const TOKEN_DICTIONARY = {
+  token: 'token',
+  city: 'city',
+  language: 'language',
+}
+
+const saveKeyValue = async (key, value) => {
+  let data = {}
+  if (await isExist(filePath)) {
+    const file = await promises.readFile(filePath)
+    data = JSON.parse(file)
+  }
+  data[key] = value
+  promises.writeFile(filePath, JSON.stringify(data))
+}
+
+const getKeyValue = async (key) => {
+  if (await isExist(filePath)) {
+    const file = await promises.readFile(filePath)
+    const data = JSON.parse(file)
+    return data[key]
+  }
+  return undefined
+}
+
+const isExist = async (path) => {
+  try {
+    await promises.stat(path)
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
+export { saveKeyValue, getKeyValue, TOKEN_DICTIONARY }
