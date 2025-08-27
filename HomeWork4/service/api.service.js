@@ -31,18 +31,14 @@ const getWeather = async (city, language) => {
     throw new Error('Не задан ключь API, задайте его через команду -t [API_KEY]')
   }
 
-  const { data } = await axios
-    .get('https://api.openweathermap.org/data/2.5/weather', {
-      params: {
-        q: city,
-        appid: token,
-        lang: language,
-        units: 'metric',
-      },
-    })
-    .catch((error) => {
-      console.err(error.message)
-    })
+  const { data } = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
+    params: {
+      q: city,
+      appid: token,
+      lang: language,
+      units: 'metric',
+    },
+  })
 
   return data
 }
