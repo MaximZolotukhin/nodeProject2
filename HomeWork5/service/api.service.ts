@@ -25,6 +25,7 @@ const getIcon = (icon: string) => {
   }
 }
 
+// Типизация
 const getWeather = async (city: string, language: string) => {
   const token: string | undefined = process.env.TOKEN_API
   if (!token) {
