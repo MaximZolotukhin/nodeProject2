@@ -1,29 +1,29 @@
 //GENERICS джинерики
-function log<T>(obj: T): T {
+function login<T>(obj: T): T {
   console.log(obj)
   return obj
 }
 
-log<string>('asd')
-log<number>(12)
+login<string>('asd')
+login<number>(12)
 
 // Усложненный вариант
-function log2<T, K>(obj: T, arr: K[]): K[] {
+function login2<T, K>(obj: T, arr: K[]): K[] {
   console.log(obj)
   return arr
 }
 
-log2<string, number>('sd', [1])
+login2<string, number>('sd', [1])
 
 // Вариант с наследованиме какого либо свойства или типа
-interface HasLenght {
-  lenght: number
+interface HasLength {
+  length: number
 }
 
-function log3<T extends HasLenght, K>(obj: T, arr: K[]): K[] {
-  obj.lenght // В этом случае мы можешь использовать такой вызов
+function login3<T extends HasLength, K>(obj: T, arr: K[]): K[] {
+  console.log(obj.length) // OK
   console.log(obj)
   return arr
 }
 
-log2<string, number>('sd', [1])
+login3('sd', [1]) // компилятор выведет T = string, работает
