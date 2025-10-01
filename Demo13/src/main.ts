@@ -1,12 +1,17 @@
 // Точка входа в приложение
-import { Container, ContainerModule } from 'inversify';
-import { App } from './app.js';
-import { ExeptionFilter } from './errors/exeption.filter.js';
-import { LoggerService } from './logger/logger.service.js';
-import { UserController } from './users/users.controller.js';
-import { ILogger } from './logger/logger.interface.js';
-import { TYPES } from './types.js';
-import { IExeptionFilter } from './errors/exeption.filter.interface.js';
+import { Container, ContainerModule } from "inversify";
+import { App } from "./app.js";
+import { ExeptionFilter } from "./errors/exeption.filter.js";
+import { LoggerService } from "./logger/logger.service.js";
+import { UserController } from "./users/users.controller.js";
+import { ILogger } from "./logger/logger.interface.js";
+import { TYPES } from "./types.js";
+import { IExeptionFilter } from "./errors/exeption.filter.interface.js";
+
+export interface BootsrapReturn {
+	appContainer: Container;
+	app: App;
+}
 
 // Правильный способ DI
 // Создаем контейнер модуль
@@ -17,7 +22,7 @@ export const appBindings = new ContainerModule((bind) => {
 	bind.bind<App>(TYPES.Application).to(App);
 });
 
-function bootstrap() {
+function bootstrap(): BootsrapReturn {
 	// Создание контейнеров и привязка к TYPES
 	const appContainer = new Container();
 	// Загружаем наши биндинги

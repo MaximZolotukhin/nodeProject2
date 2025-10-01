@@ -1,12 +1,12 @@
-import express, { Express } from 'express';
-import { Server } from 'http';
-import { UserController } from './users/users.controller.js';
-import { ExeptionFilter } from './errors/exeption.filter.js';
-import { ILogger } from './logger/logger.interface.js';
-import { TYPES } from './types.js';
-import { LoggerService } from './logger/logger.service.js';
-import { inject } from 'inversify';
-import 'reflect-metadata';
+import express, { Express } from "express";
+import { Server } from "http";
+import { UserController } from "./users/users.controller.js";
+import { ExeptionFilter } from "./errors/exeption.filter.js";
+import { ILogger } from "./logger/logger.interface.js";
+import { TYPES } from "./types.js";
+import { LoggerService } from "./logger/logger.service.js";
+import { inject } from "inversify";
+import "reflect-metadata";
 
 export class App {
 	app: Express; // Инстанц класса express
@@ -22,16 +22,16 @@ export class App {
 		this.port = 8000;
 	}
 
-	userRoutes() {
-		this.app.use('/users', this.userController.router);
+	userRoutes(): void {
+		this.app.use("/users", this.userController.router);
 	}
 
 	//Обработка ошибок
-	useExeptionFilters() {
+	useExeptionFilters(): void {
 		this.app.use(this.exeptionFilter.catch.bind(this.exeptionFilter));
 	}
 
-	public async init() {
+	public async init(): Promise<void> {
 		//Инициализируем Роуты
 		this.userRoutes();
 		//Инициализация Фильтра для обработки ошибок

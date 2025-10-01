@@ -45,7 +45,7 @@ export default [
 			"prettier/prettier": [
 				"error",
 				{
-					singleQuote: true,
+					singleQuote: false,
 					useTabs: true,
 					semi: true,
 					trailingComma: "all",
