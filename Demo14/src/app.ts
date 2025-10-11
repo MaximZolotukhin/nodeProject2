@@ -7,7 +7,6 @@ import { TYPES } from "./types.js";
 import { LoggerService } from "./logger/logger.service.js";
 import { inject } from "inversify";
 import "reflect-metadata";
-import { json } from "body-parser";
 
 export class App {
 	app: Express; // Инстанц класса express
@@ -24,7 +23,8 @@ export class App {
 	}
 
 	useMiddleware(): void {
-		this.app.use(json());
+		this.app.use(express.json()); // ← заменяет body-parser.json()
+		// this.app.use(express.urlencoded({ extended: true })); // ← заменяет body-parser.urlencoded()
 	}
 
 	userRoutes(): void {

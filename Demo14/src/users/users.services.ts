@@ -6,11 +6,11 @@ import { IUserService } from "./users.services.interface";
 
 @injectable()
 export class UserService implements IUserService {
-	createUser({ email, name, password }: UserRegisterDto): User | null {
+	async createUser({ email, name, password }: UserRegisterDto): Promise<User | null> {
 		return null;
 	}
 
-	validateUser(dto: UserLoginDto): boolean {
+	async validateUser(dto: UserLoginDto): Promise<boolean> {
 		return true;
 	}
 }

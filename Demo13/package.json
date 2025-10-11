@@ -5,9 +5,11 @@
 	"license": "ISC",
 	"author": "Veles",
 	"type": "module",
-	"main": "index.js",
+	"main": "main.js",
 	"scripts": {
-		"dev": "node ./dist/main.js",
+		"start": "node ./dist/src/main.js",
+		"dev": "nodemon",
+		"dev:inspect": "nodemon -e ts,json --exec 'node --loader ts-node/esm --inspect=localhost:9222 src/main.ts'",
 		"lint": "eslint ./src/**",
 		"lint:fix": "eslint ./src/** --fix",
 		"build": "tsc"
@@ -29,7 +31,9 @@
 		"eslint-plugin-prettier": "^5.5.4",
 		"globals": "^16.4.0",
 		"jiti": "^2.6.1",
+		"nodemon": "^3.1.10",
 		"prettier": "^3.6.2",
+		"ts-node": "^10.9.2",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.45.0"
 	}

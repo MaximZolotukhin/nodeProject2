@@ -6,32 +6,26 @@ import eslintConfigPrettier from "eslint-config-prettier";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-	// Игнорирование
 	{
 		ignores: ["dist", "node_modules"],
 	},
 
-	// Базовые рекомендации от ESLint
 	pluginJs.configs.recommended,
 
-	// Рекомендации от TypeScript ESLint
 	...tseslint.configs.recommended,
 
-	// Глобальные переменные и настройки парсера
 	{
+		files: ["**/*.{ts,tsx}"],
 		languageOptions: {
 			globals: {
 				...globals.node,
 			},
+			parser: tseslint.parser, // явно указываем парсер
 			parserOptions: {
-				project: true, // или ["./tsconfig.json"]
+				project: true,
+				tsconfigRootDir: import.meta.dirname, // ✅ КЛЮЧЕВАЯ СТРОКА
 			},
 		},
-	},
-
-	// Правила для .ts/.tsx файлов
-	{
-		files: ["**/*.{ts,tsx}"],
 		plugins: {
 			"@typescript-eslint": tseslint.plugin,
 			prettier: prettierPlugin,
