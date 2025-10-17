@@ -8,6 +8,7 @@ import { IConfigService } from "./config/config.service.interface.js";
 import { IUserController } from "./users/users.controller.interface.js";
 import { IExeptionFilter } from "./errors/exeption.filter.interface.js";
 import { UserController } from "./users/users.controller.js";
+import { PrismaService } from "../database/prisma.service.js";
 
 export class App {
 	app: Express; // Инстанц класса express
@@ -19,6 +20,7 @@ export class App {
 		@inject(TYPES.UserController) private userController: UserController,
 		@inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter,
 		@inject(TYPES.ConfigService) private configService: IConfigService,
+		@inject(TYPES.PrismaService) private prismaService: PrismaService,
 	) {
 		this.app = express();
 		this.port = 8000;
@@ -45,6 +47,8 @@ export class App {
 		this.userRoutes();
 		//Инициализация Фильтра для обработки ошибок
 		this.useExeptionFilters();
+		// Подключаемся к базе данных
+		await this.prismaService.connect();
 		//Запускаем сервер
 		this.server = this.app.listen(this.port);
 		this.logger.log(`Server start on http://localhost:${this.port}`);

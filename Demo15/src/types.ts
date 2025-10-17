@@ -1,5 +1,3 @@
-import { UserService } from "./users/users.services";
-
 // Символы по которым будут связаны библиотеки
 export const TYPES = {
 	Application: Symbol.for("Application"),
@@ -8,4 +6,5 @@ export const TYPES = {
 	UserService: Symbol.for("UserService"),
 	ExeptionFilter: Symbol.for("ExeptionFilter"),
 	ConfigService: Symbol.for("ConfigService"),
+	PrismaService: Symbol.for("PrismaService"),
 };
